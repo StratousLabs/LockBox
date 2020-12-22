@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt update && sudo apt upgrade
+
 # disable ssh and stop the service if it exists
 
 if [ systemctl is-enabled sshd && systemctl is-active sshd ] 
@@ -45,4 +47,26 @@ sudo apt install syslog-ng-core
 sudo echo "net.ipv4.icmp_echo_ignore_all = 1" >> /etc/sysctl.d/11-disableping.conf
 sudo sysctl -p /etc/sysctl.d/11-disableping.conf
 
+# install chrome
+curl -sSLO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install -y ./google-chrome-stable_current_amd64.deb
+rm -rf google-chrome-stable_current_amd64.deb
+
+# install brave
+sudo apt install -y apt-transport-https curl gnupg
+
+curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add 
+echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+
+sudo apt update && sudo apt install -y brave-browser
+
+# install lastpass
+
+# install metamask
+
+# install exodus wallet
+
+# install atomic wallet
+
+# install Bitcoin core
 
