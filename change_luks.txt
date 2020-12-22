@@ -1,0 +1,10 @@
+Reference
+https://forums.kali.org/showthread.php?46058-How-to-change-LVM-ENCRYPTED-password
+
+cat /etc/crypttab
+sda3_crypt UUID=f2a99a6b-fab4-42a9-b481-c00fb1c607ed none luks,discard
+
+sudo sbin/cryptsetup luksChangeKey /dev/sda3
+old key
+new key
+verify new key
