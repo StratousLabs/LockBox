@@ -76,3 +76,6 @@ rm -rf atomicwallet.deb
 
 # install Bitcoin core
 
+#Remove CUPS service
+sudo apt-get autoremove cups
+
