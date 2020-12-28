@@ -43,6 +43,9 @@ sudo apt install syslog-ng-core
 # install sshguard
 #sudo apt install sshguard
 
+#Install Borg Backup
+sudo apt-get install -y borgbackup
+
 # disable ping
 sudo echo "net.ipv4.icmp_echo_ignore_all = 1" >> /etc/sysctl.d/11-disableping.conf
 sudo sysctl -p /etc/sysctl.d/11-disableping.conf
@@ -51,6 +54,9 @@ sudo sysctl -p /etc/sysctl.d/11-disableping.conf
 curl -sSLO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y ./google-chrome-stable_current_amd64.deb
 rm -rf google-chrome-stable_current_amd64.deb
+
+#install Firefox
+sudo apt-get install -y firefox
 
 # install brave
 sudo apt install -y apt-transport-https curl gnupg
