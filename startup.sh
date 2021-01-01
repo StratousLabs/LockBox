@@ -41,7 +41,17 @@ sudo apt install syslog-ng-core
 #EOF
 
 # install sshguard
-#sudo apt install sshguard
+sudo apt install sshguard
+# Default Deny
+sudo iptables -P INPUT DROP
+#Enable DNS,HTTP(S)
+sudo iptables -A INPUT -p udp --dport 53 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+# Accept DNS replies
+sudo iptables -A INPUT -p udp --sport 53 -j ACCEPT
+# Accept incoming packets on existing connections
+sudo iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 
 #Install Borg Backup
 sudo apt-get install -y borgbackup
