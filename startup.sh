@@ -85,3 +85,6 @@ rm -rf atomicwallet.deb
 #Remove CUPS service
 sudo apt-get autoremove cups
 
+#Remove Elementary OS Camera app
+sudo apt remove io.elementary.camera
+
