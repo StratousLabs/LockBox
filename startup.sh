@@ -52,6 +52,10 @@ sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 sudo iptables -A INPUT -p udp --sport 53 -j ACCEPT
 # Accept incoming packets on existing connections
 sudo iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+#Save SSHguard Settings
+sudo iptables-save
+#Restart Network Services
+sudo service network-manager restart
 
 #Install Borg Backup
 sudo apt-get install -y borgbackup
