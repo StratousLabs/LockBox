@@ -96,6 +96,10 @@ rm -rf atomicwallet.deb
 
 # install Bitcoin core
 
+#install Telegram
+sudo apt install snapd
+sudo snap install telegram-desktop
+
 #Remove CUPS service
 sudo apt-get autoremove cups
 
