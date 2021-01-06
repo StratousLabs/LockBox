@@ -40,19 +40,17 @@ sudo apt install syslog-ng-core
 #log { source(src); filter(f_sshguard); destination(sshguard); };
 #EOF
 
-# install sshguard
-sudo apt install sshguard
+#Install GUFW
+sudo apt-get install -y gufw
 
-#Create Chains
-sudo iptables -N sshguard      
-ip6tables -N sshguard
-
-# block any traffic from abusers
-sudo iptables -A INPUT -j sshguard
-sudo ip6tables -A INPUT -j sshguard
-
-#Restart Network Services
-sudo service network-manager restart
+# UFW Firewall Configs
+sudo ufw default deny outgoing
+sudo ufw default deny incoming
+sudo ufw allow out 53
+sudo ufw allow out http
+sudo ufw allow out https
+sudo ufw enable
+sudo service ufw restart
 
 #Install Borg Backup
 sudo apt-get install -y borgbackup
@@ -98,11 +96,13 @@ sudo apt install snapd
 sudo snap install telegram-desktop
 
 #Remove CUPS service
-sudo apt-get autoremove cups
+sudo apt-get remove cups
 
 #Remove Elementary OS Camera app
 sudo apt remove io.elementary.camera
 
 #Install dconf to Disable Bluetooth at boot
-sudo apt-get install dconf-tools
+sudo apt-get install -y dconf-tools
 
+#Clean Logs
+find /var/log -type f -delete
