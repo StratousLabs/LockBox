@@ -40,6 +40,9 @@ sudo apt install syslog-ng-core
 #log { source(src); filter(f_sshguard); destination(sshguard); };
 #EOF
 
+#Install gnome disk utility
+sudo apt-get install -y gnome-disk-utility
+
 #Install GUFW
 sudo apt-get install -y gufw
 
