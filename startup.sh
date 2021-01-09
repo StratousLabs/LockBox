@@ -55,8 +55,17 @@ sudo ufw allow out https
 sudo ufw enable
 sudo service ufw restart
 
+
+
 #Install Borg Backup
 sudo apt-get install -y borgbackup
+
+#Flatpack Download & Vorta Backup
+sudo apt install flatpak
+sudo flatpak install flathub com.borgbase.Vorta
+
+
+
 
 # disable ping
 sudo echo "net.ipv4.icmp_echo_ignore_all = 1" >> /etc/sysctl.d/11-disableping.conf
