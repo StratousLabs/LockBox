@@ -19,7 +19,8 @@ sudo cp -a /usr/LockBox/. ~/.config/plank/dock1/launchers
 rm -rf /usr/LockBox/
 
 #Adjust Wallpaper
-sudo gsettings set org.gnome.desktop.background picture-uri "file:// ~usr/share/backgrounds/LOCKBOX WALLPAPER-01.jpg"
+gsettings set org.gnome.desktop.background picture-uri "/usr/share/backgrounds/LOCKBOX WALLPAPER-01.jpg"
+gsettings set org.gnome.desktop.background picture-options 'spanned'
 
 #Clean Logs
 find /var/log -type f -delete
