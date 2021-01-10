@@ -62,6 +62,7 @@ sudo apt-get install -y borgbackup
 
 #Flatpack Download & Vorta Backup
 sudo apt install flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install flathub com.borgbase.Vorta
 
 
