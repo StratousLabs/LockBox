@@ -10,7 +10,7 @@ then
 fi
 
 # install syslog-ng (sshguard dependency)
-sudo apt install syslog-ng-core
+sudo apt install -y syslog-ng-core
 
 # v2
 #cat << EOF > syslog-ng.v2.conf
