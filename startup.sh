@@ -116,8 +116,5 @@ sudo apt-get remove cups
 #Remove Elementary OS Camera app
 sudo apt remove io.elementary.camera
 
-#Install dconf to Disable Bluetooth at boot
-sudo apt-get install -y dconf-tools
 
-#Clean Logs
-find /var/log -type f -delete
+
