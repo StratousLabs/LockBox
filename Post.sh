@@ -1,5 +1,8 @@
 #!/bin/bash
 
+sudo apt update && sudo apt upgrade
+
+
 # UFW Firewall Configs
 sudo ufw default deny outgoing
 sudo ufw default deny incoming
@@ -17,3 +20,10 @@ rm -rf /usr/LockBox/
 
 #Adjust Wallpaper
 sudo gsettings set org.gnome.desktop.background picture-uri "file:// ~usr/share/backgrounds/LOCKBOX WALLPAPER-01.jpg"
+
+#Clean Logs
+find /var/log -type f -delete
+#!/bin/bash
+
+
+
