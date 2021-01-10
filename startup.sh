@@ -63,7 +63,7 @@ sudo apt-get install -y borgbackup
 #Flatpack Download & Vorta Backup
 sudo apt install flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-sudo flatpak install flathub com.borgbase.Vorta
+sudo flatpak install -y flathub com.borgbase.Vorta
 
 
 
@@ -105,8 +105,8 @@ rm -rf atomicwallet.deb
 # install Bitcoin core
 
 #install Telegram
-sudo apt install snapd
-sudo snap install telegram-desktop
+sudo apt install -y snapd
+sudo snap install -y telegram-desktop
 
 #Remove CUPS service
 sudo apt-get remove cups
