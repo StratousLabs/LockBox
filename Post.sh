@@ -23,7 +23,7 @@ sudo gsettings set org.gnome.desktop.background picture-uri "file:// ~usr/share/
 
 #Clean Logs
 find /var/log -type f -delete
-#!/bin/bash
+
 
 
 
