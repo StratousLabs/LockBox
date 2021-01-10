@@ -65,6 +65,8 @@ sudo apt install flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install -y flathub com.borgbase.Vorta
 
+#Gnome Feeds
+sudo flatpak install flathub org.gabmus.gfeeds
 
 
 
