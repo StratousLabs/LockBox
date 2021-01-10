@@ -15,8 +15,8 @@ sudo service ufw restart
 
 #Load Dock/Remove Dir
 sudo rm ~/.config/plank/dock1/launchers/*
-sudo cp -a /usr/LockBox/. ~/.config/plank/dock1/launchers
-rm -rf /usr/LockBox/
+sudo cp -a /usr/Lockbox-Plank/. ~/.config/plank/dock1/launchers
+rm -rf /usr/Lockbox-Plank/
 
 #Adjust Wallpaper
 gsettings set org.gnome.desktop.background picture-uri "/usr/share/backgrounds/LOCKBOX WALLPAPER-01.jpg"
