@@ -1,6 +1,7 @@
 #!/bin/bash
 
-sudo apt update && sudo apt upgrade
+
+sudo apt update -y && sudo apt upgrade -y
 
 # disable ssh and stop the service if it exists
 
