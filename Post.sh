@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 # UFW Firewall Configs
 sudo ufw default deny outgoing
 sudo ufw default deny incoming
