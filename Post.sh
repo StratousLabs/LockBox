@@ -1,6 +1,11 @@
 #!/bin/bash
 
 
+
+#Load Dock/Remove Dir
+sudo rm ~/.config/plank/dock1/launchers/*
+sudo cp -a /usr/Lockbox-Plank/. ~/.config/plank/dock1/launchers
+
 sudo apt update -y && sudo apt upgrade -y
 
 
@@ -14,18 +19,10 @@ sudo ufw enable
 sudo service ufw restart
 
 
-#Load Dock/Remove Dir
-sudo rm ~/.config/plank/dock1/launchers/*
-sudo cp -a /usr/Lockbox-Plank/. ~/.config/plank/dock1/launchers
-rm -rf /usr/Lockbox-Plank/
-
-#Adjust Wallpaper
-gsettings set org.gnome.desktop.background picture-uri "/usr/share/backgrounds/LOCKBOX WALLPAPER-01.jpg"
-gsettings set org.gnome.desktop.background picture-options 'spanned'
-
-#Clean Logs
-find /var/log -type f -delete
-
-
-
+#Clean Logs/Folders
+sudo chmod a+rwx ~/.config/plank/dock1/launchers
+#find /var/log -type f -delete
+sudo rm -rf /usr/Lockbox-Plank/
+rm *.dockitem
+sudo rm -rf /usr/Post.sh
 
