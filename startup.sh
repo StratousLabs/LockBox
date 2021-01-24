@@ -66,6 +66,9 @@ sudo apt install flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 sudo flatpak install -y flathub com.borgbase.Vorta
 
+#install Telegram
+sudo flatpak install -y org.telegram.desktop
+
 #Gnome Feeds
 sudo flatpak install flathub org.gabmus.gfeeds
 
@@ -107,9 +110,6 @@ rm -rf atomicwallet.deb
 
 # install Bitcoin core
 
-#install Telegram
-sudo apt install -y snapd
-sudo snap install -y telegram-desktop
 
 #Remove CUPS service
 sudo apt-get remove cups
