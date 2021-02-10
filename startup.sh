@@ -111,8 +111,9 @@ rm -rf atomicwallet.deb
 # install Bitcoin core
 
 
-#Remove CUPS service
-sudo apt-get remove cups
+#disable CUPS service
+systemctl disable cups-browsed
+systemctl disable cups.service
 
 #Remove Elementary OS Camera app
 sudo apt remove io.elementary.camera
