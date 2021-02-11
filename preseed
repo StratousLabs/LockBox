@@ -18,8 +18,9 @@ d-i netcfg/choose_interface select auto
 #d-i passwd/username string username
 #d-i passwd/user-password password insecure
 #d-i passwd/user-password-again password insecure
-#d-i user-setup/allow-password-weak boolean true
-#d-i user-setup/encrypt-home boolean false
+
+d-i user-setup/allow-password-weak boolean true
+d-i user-setup/encrypt-home boolean false
 
 
 # Create the first user with the specified UID instead of the default.
@@ -76,75 +77,22 @@ ubiquity partman-lvm/confirm_nooverwrite boolean true
 # - atomic: all files in one partition
 # - home:   separate /home partition
 # - multi:  separate /home, /var, and /tmp partitions
-ubiquity partman-auto/choose_recipe select boot-crypto
-ubiquity partman-auto-lvm/new_vg_name string lockbox
-ubiquity partman-auto/expert_recipe string \
-      boot-crypto :: \
-              538 538 1075 free \
-                    $primary{ } \
-                    $iflabel{ gpt } \
-                    $reusemethod{ } \
-                    method{ efi } format{ } \
-              . \
-              256 512 512 ext2 \
-                    $primary{ } \
-                    $defaultignore{ } \
-                    method{ format } format{ } \
-                    use_filesystem{ } filesystem{ ext2 } \
-                    mountpoint{ /boot } \
-              . \
-              14000 14000 14000 ext4 \
-                    $lvmok{ } \
-                    method{ format } format{ } \
-                    use_filesystem{ } filesystem{ ext4 } \
-                    mountpoint{ / } \
-              . \
-              120000 120000 120000 ext4 \
-                    $lvmok{ } \
-                    method{ format } format{ } \
-                    use_filesystem{ } filesystem{ ext4 } \
-                    mountpoint{ /home } \
-              . \
-              100% 100% 100% linux-swap \
-                    $lvmok{ } \
-                    lv_name{ swap } \
-                    method{ swap } format{ } \
-              . \
-              4000 4000 4000 ext4 \
-                    $lvmok{ } \
-                    method{ format } format{ } \
-                    use_filesystem{ } filesystem{ ext4 } \
-                    mountpoint{ /tmp } \
-              . \
-              10000 10000 10000 ext4 \
-                    $lvmok{ } \
-                    method{ format } format{ } \
-                    use_filesystem{ } filesystem{ ext4 } \
-                    mountpoint{ /var } \
-              . \
-              10000 100000 -1 ext4 \
-                    $lvmok{ } \
-                    method{ format } format{ } \
-                    use_filesystem{ } filesystem{ ext4 } \
-                    mountpoint{ /spare } \
-              . \
 
-# This makes partman automatically partition without confirmation, provided
-# that you told it what to do using one of the methods above.
-ubiquity partman-partitioning/confirm_write_new_label boolean true
-ubiquity partman/choose_partition select finish
-ubiquity partman/confirm boolean true
-ubiquity partman/confirm_nooverwrite boolean true
-
-# When disk encryption is enabled, skip wiping the partitions beforehand.
-#d-i partman-auto-crypto/erase_disks boolean false
-
-# This makes partman automatically partition without confirmation.
+ubiquity partman-auto-lvm/guided_size string max
+ubiquity partman-auto-lvm/new_vg_name string main
+ubiquity partman-lvm/device_remove_lvm boolean true
+ubiquity partman-lvm/confirm boolean true
+ubiquity partman-md/device_remove_md boolean true
 ubiquity partman-md/confirm boolean true
-ubiquity partman-partitioning/confirm_write_new_label boolean true
-ubiquity partman/choose_partition select finish
-ubiquity partman/confirm boolean true
-ubiquity partman/confirm_nooverwrite boolean true
+ubiquity partman-auto/choose_recipe select atomic
+
+# This makes partman automatically partition without confirmation
+d-i partman-lvm/confirm boolean true
+d-i partman-lvm/confirm_nooverwrite boolean true
+d-i partman-partitioning/confirm_write_new_label boolean true
+d-i partman/choose_partition select finish
+d-i partman/confirm_nooverwrite boolean true
+d-i partman-basicmethods/method_only boolean false
 
 ## Controlling how partitions are mounted
 # The default is to mount by UUID, but you can also choose "traditional" to
