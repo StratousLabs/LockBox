@@ -2,42 +2,48 @@
 d-i auto-install/enable boolean true
 d-i debconf/priority select critical
 
-# Keyboard selection.
+# locale
+d-i debconf/language string en
+### Localization
+####################
+# Preseeding only locale sets language, country and locale.
+d-i debian-installer/locale string en_US
+
+# Keyboard selection
+# Disable automatic (interactive) keymap detection.
+d-i console-setup/ask_detect boolean false
 d-i keyboard-configuration/xkb-keymap select us
-# d-i keyboard-configuration/toggle select No toggling
+
+ubiquity languagechooser/language-name select English
+ubiquity countrychooser/shortlist select US
+ubiquity localechooser/supported-locales en_US.UTF-8
+ubiquity console-keymaps-at/keymap select us
+
+### Clock and time zone setup
+# Controls whether or not the hardware clock is set to UTC.
+ubiquity clock-setup/utc boolean false
+ubiquity time/zone select US/Eastern
+
+
+# Setting the locales, country
+# Supported locales available in /usr/share/i18n/SUPPORTED
+d-i debian-installer/language string en
+d-i localechooser/languagelist select en
+d-i localechooser/continentlist select North America
+d-i localechooser/countrylist/North America select United States
 
 ### Network configuration
 # netcfg will choose an interface that has link if possible. This makes it
 # skip displaying a list if there is more than one interface.
 d-i netcfg/choose_interface select auto
 
-
-##UserAcount Creation
-#d-i passwd/root-login boolean false
-#d-i passwd/user-fullname string Test Name
-#d-i passwd/username string username
-#d-i passwd/user-password password insecure
-#d-i passwd/user-password-again password insecure
-
-d-i user-setup/allow-password-weak boolean true
-d-i user-setup/encrypt-home boolean false
-
-
 # Create the first user with the specified UID instead of the default.
 #d-i passwd/user-uid string 1010
 
-# The user account will be added to some standard initial groups. To
-# override that, use this.
-#d-i passwd/user-default-groups string audio cdrom video
-
-### Clock and time zone setup
-# You may set this to any valid setting for $TZ; see the contents of
-# /usr/share/zoneinfo/ for valid values.
-d-i time/zone string US/Eastern
-
-
 
 ### Partitioning
+
+
 # If the system has free space you can choose to only partition that space.
 # This is only honoured if partman-auto/method (below) is not set.
 #d-i partman-auto/init_automatically_partition select biggest_free
@@ -47,9 +53,12 @@ d-i time/zone string US/Eastern
 # name must be given in traditional, non-devfs format (so e.g. /dev/sda
 # and not e.g. /dev/discs/disc0/disc).
 
-# For example, to use the first SCSI/SATA hard disk:
-#d-i partman-auto/disk string /dev/sda
+#Unmount Partitions in Use
 d-i preseed/early_command string umount /media || true
+
+# this will DESTROY any VGs and PVs found
+d-i partman/early_command string lvremove --select all -ff -y; vgremove --select all -ff -y; pvremove /dev/sd* -ff -y 
+
 
 # In addition, you'll need to specify the method to use.
 # The presently available methods are:
@@ -96,3 +105,5 @@ d-i partman-basicmethods/method_only boolean false
 # use traditional device names, or "label" to try filesystem labels before
 # falling back to UUIDs.
 #ubiquity partman/mount_style select uuid
+
+
