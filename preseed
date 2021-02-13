@@ -2,6 +2,11 @@
 d-i auto-install/enable boolean true
 d-i debconf/priority select critical
 
+### Wipe All Partitions
+d-i partman/early_command \
+    string /bin/dd if=/dev/zero of=/dev/sda bs=512 count=1
+    
+    
 # locale
 d-i debconf/language string en
 ### Localization
