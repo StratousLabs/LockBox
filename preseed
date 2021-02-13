@@ -61,8 +61,8 @@ d-i netcfg/choose_interface select auto
 #Unmount Partitions in Use
 d-i preseed/early_command string umount /media || true
 
-# this will DESTROY any VGs and PVs found
-d-i partman/early_command string lvremove --select all -ff -y; vgremove --select all -ff -y; pvremove /dev/sd* -ff -y 
+ubiquity partman-auto/disk string /dev/sda
+
 
 
 # In addition, you'll need to specify the method to use.
@@ -71,6 +71,7 @@ d-i partman/early_command string lvremove --select all -ff -y; vgremove --select
 # - lvm:     use LVM to partition the disk
 # - crypto:  use LVM within an encrypted partition
 ubiquity partman-auto/method string crypto
+
 
 # If one of the disks that are going to be automatically partitioned
 # contains an old LVM configuration, the user will normally receive a
@@ -95,7 +96,7 @@ ubiquity partman-lvm/device_remove_lvm boolean true
 ubiquity partman-lvm/confirm boolean true
 ubiquity partman-md/device_remove_md boolean true
 ubiquity partman-md/confirm boolean true
-ubiquity partman-auto/choose_recipe select atomic
+ubiquity partman-auto/choose_recipe select home
 
 # This makes partman automatically partition without confirmation
 d-i partman-lvm/confirm boolean true
@@ -110,5 +111,3 @@ d-i partman-basicmethods/method_only boolean false
 # use traditional device names, or "label" to try filesystem labels before
 # falling back to UUIDs.
 #ubiquity partman/mount_style select uuid
-
-
