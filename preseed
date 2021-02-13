@@ -1,23 +1,26 @@
 ### Unattended Installation
-d-i auto-install/enable boolean true
-d-i debconf/priority select critical
+ubiquity  auto-install/enable boolean true
+ubiquity  debconf/priority select critical
 
 ### Wipe All Partitions
-d-i partman/early_command \
+ubiquity  partman/early_command \
     string /bin/dd if=/dev/zero of=/dev/sda bs=512 count=1
     
     
-# locale
-d-i debconf/language string en
+
 ### Localization
 ####################
 # Preseeding only locale sets language, country and locale.
-d-i debian-installer/locale string en_US
+ubiquity debian-installer/locale string en_US
+# locale
+ubiquity debconf/language string en
+
+
 
 # Keyboard selection
 # Disable automatic (interactive) keymap detection.
-d-i console-setup/ask_detect boolean false
-d-i keyboard-configuration/xkb-keymap select us
+ubiquity console-setup/ask_detect boolean false
+ubiquity keyboard-configuration/xkb-keymap select us
 
 ubiquity languagechooser/language-name select English
 ubiquity countrychooser/shortlist select US
@@ -30,25 +33,18 @@ ubiquity clock-setup/utc boolean false
 ubiquity time/zone select US/Eastern
 
 
-# Setting the locales, country
-# Supported locales available in /usr/share/i18n/SUPPORTED
-d-i debian-installer/language string en
-d-i localechooser/languagelist select en
-d-i localechooser/continentlist select North America
-d-i localechooser/countrylist/North America select United States
+### Setting the locales, country
+ubiquity debian-installer/language string en
+ubiquity localechooser/languagelist select en
+ubiquity localechooser/continentlist select North America
+ubiquity localechooser/countrylist/North America select United States
 
 ### Network configuration
 # netcfg will choose an interface that has link if possible. This makes it
 # skip displaying a list if there is more than one interface.
-d-i netcfg/choose_interface select auto
-
-# Create the first user with the specified UID instead of the default.
-#d-i passwd/user-uid string 1010
-
+ubiquity netcfg/choose_interface select auto
 
 ### Partitioning
-
-
 # If the system has free space you can choose to only partition that space.
 # This is only honoured if partman-auto/method (below) is not set.
 #d-i partman-auto/init_automatically_partition select biggest_free
@@ -59,31 +55,15 @@ d-i netcfg/choose_interface select auto
 # and not e.g. /dev/discs/disc0/disc).
 
 #Unmount Partitions in Use
-d-i preseed/early_command string umount /media || true
-
-ubiquity partman-auto/disk string /dev/sda
-
-
+ubiquity preseed/early_command string umount /media || true
 
 # In addition, you'll need to specify the method to use.
 # The presently available methods are:
 # - regular: use the usual partition types for your architecture
 # - lvm:     use LVM to partition the disk
 # - crypto:  use LVM within an encrypted partition
+ubiquity partman-auto/disk string /dev/sda
 ubiquity partman-auto/method string crypto
-
-
-# If one of the disks that are going to be automatically partitioned
-# contains an old LVM configuration, the user will normally receive a
-# warning. This can be preseeded away...
-ubiquity partman-lvm/device_remove_lvm boolean true
-
-# The same applies to pre-existing software RAID array:
-ubiquity partman-md/device_remove_md boolean true
-
-# And the same goes for the confirmation to write the lvm partitions.
-ubiquity partman-lvm/confirm boolean true
-ubiquity partman-lvm/confirm_nooverwrite boolean true
 
 # You can choose one of the three predefined partitioning recipes:
 # - atomic: all files in one partition
@@ -99,15 +79,9 @@ ubiquity partman-md/confirm boolean true
 ubiquity partman-auto/choose_recipe select home
 
 # This makes partman automatically partition without confirmation
-d-i partman-lvm/confirm boolean true
-d-i partman-lvm/confirm_nooverwrite boolean true
-d-i partman-partitioning/confirm_write_new_label boolean true
-d-i partman/choose_partition select finish
-d-i partman/confirm_nooverwrite boolean true
-d-i partman-basicmethods/method_only boolean false
-
-## Controlling how partitions are mounted
-# The default is to mount by UUID, but you can also choose "traditional" to
-# use traditional device names, or "label" to try filesystem labels before
-# falling back to UUIDs.
-#ubiquity partman/mount_style select uuid
+ubiquity partman-lvm/confirm boolean true
+ubiquity partman-lvm/confirm_nooverwrite boolean true
+ubiquity partman-partitioning/confirm_write_new_label boolean true
+ubiquity partman/choose_partition select finish
+ubiquity partman/confirm_nooverwrite boolean true
+ubiquity partman-basicmethods/method_only boolean false
