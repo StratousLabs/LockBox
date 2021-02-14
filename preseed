@@ -39,10 +39,7 @@ ubiquity localechooser/languagelist select en
 ubiquity localechooser/continentlist select North America
 ubiquity localechooser/countrylist/North America select United States
 
-### Network configuration
-# netcfg will choose an interface that has link if possible. This makes it
-# skip displaying a list if there is more than one interface.
-ubiquity netcfg/choose_interface select auto
+
 
 ### Partitioning
 # If the system has free space you can choose to only partition that space.
@@ -85,3 +82,4 @@ ubiquity partman-partitioning/confirm_write_new_label boolean true
 ubiquity partman/choose_partition select finish
 ubiquity partman/confirm_nooverwrite boolean true
 ubiquity partman-basicmethods/method_only boolean false
+
