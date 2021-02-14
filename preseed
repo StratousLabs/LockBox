@@ -67,6 +67,57 @@ ubiquity partman-auto/method string crypto
 # - home:   separate /home partition
 # - multi:  separate /home, /var, and /tmp partitions
 
+
+d-i partman-auto/choose_recipe select boot-crypto
+d-i partman-auto-lvm/new_vg_name string gaming
+d-i partman-auto/expert_recipe string \
+      boot-crypto :: \
+              1024 538 1024 free \
+                    $primary{ } \
+                    $iflabel{ gpt } \
+                    $reusemethod{ } \
+                    method{ efi } format{ } \
+              . \
+              1024 512 1024 ext2 \
+                    $primary{ } \
+                    $defaultignore{ } \
+                    method{ format } format{ } \
+                    use_filesystem{ } filesystem{ ext2 } \
+                    mountpoint{ /boot } \
+              . \
+              500 10000 1000000 ext4 \
+                    $lvmok{ } \
+                    method{ format } format{ } \
+                    use_filesystem{ } filesystem{ ext4 } \
+                    mountpoint{ / } \
+				. \	
+				 100000 100000 100000 ext4 \
+                    $lvmok{ } \
+                    method{ format } format{ } \
+                    use_filesystem{ } filesystem{ ext4 } \
+                    mountpoint{ /home } \
+					
+				. \	
+				 64 512 300% linux-swap \
+                    $lvmok{ } \
+                    lv_name{ swap } \
+                    method{ swap } format{ } \
+              . \
+              4000 4000 4000 ext4 \
+                    $lvmok{ } \
+                    method{ format } format{ } \
+                    use_filesystem{ } filesystem{ ext4 } \
+                    mountpoint{ /tmp } \
+              . \
+              10000 10000 10000 ext4 \
+                    $lvmok{ } \
+                    method{ format } format{ } \
+                    use_filesystem{ } filesystem{ ext4 } \
+                    mountpoint{ /var } \
+              . \
+
+
+
 ubiquity partman-auto-lvm/guided_size string max
 ubiquity partman-auto-lvm/new_vg_name string main
 ubiquity partman-lvm/device_remove_lvm boolean true
