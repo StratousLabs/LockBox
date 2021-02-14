@@ -41,6 +41,7 @@ ubiquity localechooser/countrylist/North America select United States
 
 
 
+
 ### Partitioning
 # If the system has free space you can choose to only partition that space.
 # This is only honoured if partman-auto/method (below) is not set.
@@ -67,10 +68,24 @@ ubiquity partman-auto/method string crypto
 # - home:   separate /home partition
 # - multi:  separate /home, /var, and /tmp partitions
 
+ubiquity partman-auto-lvm/guided_size string max
+ubiquity partman-auto-lvm/new_vg_name string main
+ubiquity partman-lvm/device_remove_lvm boolean true
+ubiquity partman-lvm/confirm boolean true
+ubiquity partman-md/device_remove_md boolean true
+ubiquity partman-md/confirm boolean true
+ubiquity partman-auto/choose_recipe select atomic
 
-d-i partman-auto/choose_recipe select boot-crypto
-d-i partman-auto-lvm/new_vg_name string gaming
-d-i partman-auto/expert_recipe string \
+
+
+
+# You can choose one of the three predefined partitioning recipes:
+# - atomic: all files in one partition
+# - home:   separate /home partition
+# - multi:  separate /home, /var, and /tmp partitions
+ubiquity partman-auto/choose_recipe select boot-crypto
+ubiquity partman-auto-lvm/new_vg_name string LockBox
+ubiquity partman-auto/expert_recipe string \
       boot-crypto :: \
               1024 538 1024 free \
                     $primary{ } \
@@ -91,40 +106,8 @@ d-i partman-auto/expert_recipe string \
                     use_filesystem{ } filesystem{ ext4 } \
                     mountpoint{ / } \
 				. \	
-				 100000 100000 100000 ext4 \
-                    $lvmok{ } \
-                    method{ format } format{ } \
-                    use_filesystem{ } filesystem{ ext4 } \
-                    mountpoint{ /home } \
-					
-				. \	
-				 64 512 300% linux-swap \
-                    $lvmok{ } \
-                    lv_name{ swap } \
-                    method{ swap } format{ } \
-              . \
-              4000 4000 4000 ext4 \
-                    $lvmok{ } \
-                    method{ format } format{ } \
-                    use_filesystem{ } filesystem{ ext4 } \
-                    mountpoint{ /tmp } \
-              . \
-              10000 10000 10000 ext4 \
-                    $lvmok{ } \
-                    method{ format } format{ } \
-                    use_filesystem{ } filesystem{ ext4 } \
-                    mountpoint{ /var } \
-              . \
+		
 
-
-
-ubiquity partman-auto-lvm/guided_size string max
-ubiquity partman-auto-lvm/new_vg_name string main
-ubiquity partman-lvm/device_remove_lvm boolean true
-ubiquity partman-lvm/confirm boolean true
-ubiquity partman-md/device_remove_md boolean true
-ubiquity partman-md/confirm boolean true
-ubiquity partman-auto/choose_recipe select atomic
 
 # This makes partman automatically partition without confirmation
 ubiquity partman-lvm/confirm boolean true
@@ -133,4 +116,3 @@ ubiquity partman-partitioning/confirm_write_new_label boolean true
 ubiquity partman/choose_partition select finish
 ubiquity partman/confirm_nooverwrite boolean true
 ubiquity partman-basicmethods/method_only boolean false
-
