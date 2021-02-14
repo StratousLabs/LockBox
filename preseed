@@ -6,16 +6,12 @@ ubiquity  debconf/priority select critical
 ubiquity  partman/early_command \
     string /bin/dd if=/dev/zero of=/dev/sda bs=512 count=1
     
-    
-
 ### Localization
 ####################
 # Preseeding only locale sets language, country and locale.
 ubiquity debian-installer/locale string en_US
 # locale
 ubiquity debconf/language string en
-
-
 
 # Keyboard selection
 # Disable automatic (interactive) keymap detection.
@@ -32,15 +28,11 @@ ubiquity console-keymaps-at/keymap select us
 ubiquity clock-setup/utc boolean false
 ubiquity time/zone select US/Eastern
 
-
 ### Setting the locales, country
 ubiquity debian-installer/language string en
 ubiquity localechooser/languagelist select en
 ubiquity localechooser/continentlist select North America
 ubiquity localechooser/countrylist/North America select United States
-
-
-
 
 ### Partitioning
 # If the system has free space you can choose to only partition that space.
@@ -76,9 +68,6 @@ ubiquity partman-md/device_remove_md boolean true
 ubiquity partman-md/confirm boolean true
 ubiquity partman-auto/choose_recipe select atomic
 
-
-
-
 # You can choose one of the three predefined partitioning recipes:
 # - atomic: all files in one partition
 # - home:   separate /home partition
@@ -107,8 +96,6 @@ ubiquity partman-auto/expert_recipe string \
                     mountpoint{ / } \
 				. \	
 		
-
-
 # This makes partman automatically partition without confirmation
 ubiquity partman-lvm/confirm boolean true
 ubiquity partman-lvm/confirm_nooverwrite boolean true
