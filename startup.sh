@@ -94,22 +94,6 @@ echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable ma
 
 sudo apt update && sudo apt install -y brave-browser
 
-# install lastpass
-
-# install metamask
-
-# install exodus wallet
-sudo curl -sSLO https://downloads.exodus.io/releases/exodus_20.12.18_amd64.deb
-sudo apt install -y ./exodus_20.12.18_amd64.deb
-rm -rf exodus_20.12.18_amd64.deb
-
-# install atomic wallet
-sudo curl -sSLO https://get.atomicwallet.io/download/atomicwallet.deb
-sudo apt install -y ./atomicwallet.deb
-rm -rf atomicwallet.deb
-
-# install Bitcoin core
-
 
 #disable CUPS service
 systemctl disable cups-browsed
